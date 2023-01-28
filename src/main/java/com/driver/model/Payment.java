@@ -62,6 +62,12 @@ public class Payment {
 	public void setReservation(Reservation reservation) {
 		this.reservation = reservation;
 	}
+
+	@Override
+	public String toString() {
+		return "Payment [id=" + id + ", paymentCompleted=" + paymentCompleted + ", paymentMode=" + paymentMode
+				+ ", reservation=" + reservation + "]";
+	}
 	
 	
 

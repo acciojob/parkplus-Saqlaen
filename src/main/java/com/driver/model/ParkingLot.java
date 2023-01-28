@@ -63,6 +63,11 @@ public class ParkingLot {
 	public ParkingLot() {
 		super();
 	}
+
+	@Override
+	public String toString() {
+		return "ParkingLot [id=" + id + ", name=" + name + ", address=" + address + ", spotList=" + spotList + "]";
+	}
 	
 	
 	

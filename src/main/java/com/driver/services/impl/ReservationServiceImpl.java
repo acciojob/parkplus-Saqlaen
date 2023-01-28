@@ -9,6 +9,7 @@ import com.driver.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,19 +25,29 @@ public class ReservationServiceImpl implements ReservationService {
     @Autowired
     ParkingLotRepository parkingLotRepository3;
     
-    @Override
+    @SuppressWarnings("unused")
+	@Override
     public Reservation reserveSpot(Integer userId, Integer parkingLotId, Integer timeInHours, Integer numberOfWheels) throws Exception {
+    	
     	ParkingLot parkinglot = parkingLotRepository3.findById(parkingLotId).get();
     	User user = userRepository3.findById( userId ).get();
     	
     	List<Spot> listOfSpotsInParking = parkinglot.getSpotList();
     	List<Spot> availableSpots =  listOfSpotsInParking.stream().filter( spot -> !spot.isOccupied() ).collect( Collectors.toList() );
     	
-    	if( parkinglot == null || user == null || availableSpots.size() == 0 ) {
+    	if( parkinglot == null ) {
     		throw new Exception("Cannot make reservation");
     	}
     	
-    	List<Spot> filteredSpots = null;
+    	if( user == null ) {
+    		throw new Exception("Cannot make reservation");
+    	}
+    	
+    	if( availableSpots.size() == 0 ) {
+    		throw new Exception("Cannot make reservation");
+    	}
+    	
+    	List<Spot> filteredSpots = new ArrayList<>();
     	// select spot which can accomodate the numberofwheels
     	if( numberOfWheels == 2 ) {
     		for( Spot spot : availableSpots ) {

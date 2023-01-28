@@ -32,11 +32,11 @@ public class PaymentServiceImpl implements PaymentService {
     	}
     	
     	String paymentMode = mode.toLowerCase();
-    	if( paymentMode == "cash" ) {
+    	if( paymentMode.equals("cash") ) {
     		payment.setPaymentMode( PaymentMode.CASH );
-    	}else if( paymentMode == "card" ) {	
+    	}else if( paymentMode.equals("card") ) {	
     		payment.setPaymentMode( PaymentMode.CARD );
-    	}else if( paymentMode == "upi" ) {
+    	}else if( paymentMode.equals("upi") ) {
     		payment.setPaymentMode( PaymentMode.UPI );
     	}else {
     		throw new Exception("Payment mode not detected");

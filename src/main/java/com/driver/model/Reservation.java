@@ -84,6 +84,12 @@ public class Reservation {
 		return payment;
 	}
 
+	@Override
+	public String toString() {
+		return "Reservation [id=" + id + ", numberOfHours=" + numberOfHours + ", billAmount=" + billAmount + ", user="
+				+ user + ", spot=" + spot + ", payment=" + payment + "]";
+	}
+
 	public void setPayment(Payment payment) {
 		this.payment = payment;
 	}

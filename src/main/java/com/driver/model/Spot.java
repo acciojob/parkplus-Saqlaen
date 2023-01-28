@@ -93,6 +93,12 @@ public class Spot {
 	public void setReservationList(List<Reservation> reservationList) {
 		this.reservationList = reservationList;
 	}
+
+	@Override
+	public String toString() {
+		return "Spot [id=" + id + ", spotType=" + spotType + ", pricePerHour=" + pricePerHour + ", occupied=" + occupied
+				+ ", parkingLot=" + parkingLot + ", reservationList=" + reservationList + "]";
+	}
 	
 	
 	
