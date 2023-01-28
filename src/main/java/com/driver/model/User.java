@@ -17,7 +17,7 @@ public class User {
 	private int id;
 	
 	private String name;
-	private String phoneNo;
+	private String phoneNumber;
 	private String password;
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -30,7 +30,7 @@ public class User {
 	public User(String name, String phoneNo, String password) {
 		super();
 		this.name = name;
-		this.phoneNo = phoneNo;
+		this.phoneNumber = phoneNo;
 		this.password = password;
 	}
 
@@ -50,12 +50,12 @@ public class User {
 		this.name = name;
 	}
 
-	public String getPhoneNo() {
-		return phoneNo;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setPhoneNo(String phoneNo) {
-		this.phoneNo = phoneNo;
+	public void setPhoneNumber(String phoneNo) {
+		this.phoneNumber = phoneNo;
 	}
 
 	public String getPassword() {
