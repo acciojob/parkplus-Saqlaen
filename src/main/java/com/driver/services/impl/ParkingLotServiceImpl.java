@@ -36,19 +36,21 @@ public class ParkingLotServiceImpl implements ParkingLotService {
     public Spot addSpot(int parkingLotId, Integer numberOfWheels, Integer pricePerHour) {
     	Spot parkingSpot = new Spot();
     	
-    	if( (int)numberOfWheels == 2 ) {
+    	if( numberOfWheels == 2 ) {
     		parkingSpot.setSpotType( SpotType.TWO_WHEELER );
     	}
-    	else if( (int)numberOfWheels == 4 ) {
+    	else if( numberOfWheels > 2 && numberOfWheels <= 4 ) {
     		parkingSpot.setSpotType( SpotType.FOUR_WHEELER );
     	}
     	else {
-    		if( (int)numberOfWheels > 4 ) {
+    		if( numberOfWheels > 4 ) {
     			parkingSpot.setSpotType( SpotType.OTHERS );
     		}
     	}
     	parkingSpot.setPricePerHour(pricePerHour);
     	parkingSpot.setOccupied(false);
+    	
+    	spotRepository1.save( parkingSpot );
     	
     	ParkingLot lot = parkingLotRepository1.findById(parkingLotId).get();
     	List<Spot> spotsList = lot.getSpotList();

@@ -3,6 +3,7 @@ package com.driver.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 public class Spot {
@@ -21,6 +24,7 @@ public class Spot {
 	private SpotType spotType;
 	private int pricePerHour;
 	
+	@ColumnDefault(value = "false" )
 	private boolean occupied;
 	
 	public boolean isOccupied() {
