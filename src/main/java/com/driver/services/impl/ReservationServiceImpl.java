@@ -30,7 +30,7 @@ public class ReservationServiceImpl implements ReservationService {
     	User user = userRepository3.findById( userId ).get();
     	
     	List<Spot> listOfSpotsInParking = parkinglot.getSpotList();
-    	List<Spot> availableSpots =  listOfSpotsInParking.stream().filter( spot -> !spot.isOcuupied() ).collect( Collectors.toList() );
+    	List<Spot> availableSpots =  listOfSpotsInParking.stream().filter( spot -> !spot.isOccupied() ).collect( Collectors.toList() );
     	
     	if( parkinglot == null || user == null || availableSpots.size() == 0 ) {
     		throw new Exception("Cannot make reservation");
@@ -81,7 +81,7 @@ public class ReservationServiceImpl implements ReservationService {
     	
     	
     	Reservation reservation = new Reservation();
-    	reservation.setNoOfHours( timeInHours );
+    	reservation.setNumberOfHours( timeInHours );
     	reservation.setUser(user);
     	reservation.setSpot(MinPriceSpot);
     	reservation.setBillAmount(MinTotalPrice);
