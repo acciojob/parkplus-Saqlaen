@@ -16,7 +16,7 @@ public class Reservation {
 	@GeneratedValue(strategy = GenerationType.AUTO )
 	private int id;
 	
-	private int noOfHours;
+	private int numberOfHours;
 	
 	private int billAmount;
 	
@@ -43,9 +43,9 @@ public class Reservation {
 		super();
 	}
 
-	public Reservation(int noOfHours) {
+	public Reservation(int numberOfHours) {
 		super();
-		this.noOfHours = noOfHours;
+		this.numberOfHours = numberOfHours;
 	}
 
 	public int getId() {
@@ -56,12 +56,12 @@ public class Reservation {
 		this.id = id;
 	}
 
-	public int getNoOfHours() {
-		return noOfHours;
+	public int getNumberOfHours() {
+		return numberOfHours;
 	}
 
-	public void setNoOfHours(int noOfHours) {
-		this.noOfHours = noOfHours;
+	public void setNumberOfHours(int NumberOfHours) {
+		this.numberOfHours = NumberOfHours;
 	}
 
 	public User getUser() {

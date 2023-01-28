@@ -14,7 +14,7 @@ public class Payment {
 	@GeneratedValue(strategy = GenerationType.AUTO )
 	private int id;
 	
-	private boolean paymentComplete;
+	private boolean paymentCompleted;
 	private PaymentMode paymentMode;
 	
 	@OneToOne
@@ -27,7 +27,7 @@ public class Payment {
 
 	public Payment(boolean paymentComplete, PaymentMode paymentMode) {
 		super();
-		this.paymentComplete = paymentComplete;
+		this.paymentCompleted = paymentComplete;
 		this.paymentMode = paymentMode;
 	}
 
@@ -39,12 +39,12 @@ public class Payment {
 		this.id = id;
 	}
 
-	public boolean isPaymentComplete() {
-		return paymentComplete;
+	public boolean isPaymentCompleted() {
+		return paymentCompleted;
 	}
 
-	public void setPaymentComplete(boolean paymentComplete) {
-		this.paymentComplete = paymentComplete;
+	public void setPaymentComplete(boolean paymentCompleted) {
+		this.paymentCompleted = paymentCompleted;
 	}
 
 	public PaymentMode getPaymentMode() {
