@@ -50,7 +50,7 @@ public class ReservationServiceImpl implements ReservationService {
     	List<Spot> availableSpots =  listOfSpotsInParking.stream().filter( spot -> !spot.isOccupied() ).collect( Collectors.toList() );
     	
     	if( availableSpots.size() == 0 ) {
-    		throw new Exception("Cannot make reservation");
+    		throw new Exception("null");
     	}
     	
     	List<Spot> filteredSpots = new ArrayList<>();
