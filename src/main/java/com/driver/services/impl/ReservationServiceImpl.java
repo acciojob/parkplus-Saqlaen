@@ -21,10 +21,12 @@ public class ReservationServiceImpl implements ReservationService {
     UserRepository userRepository3;
     @Autowired
     SpotRepository spotRepository3;
+    
     @Autowired
     ReservationRepository reservationRepository3;
     @Autowired
     ParkingLotRepository parkingLotRepository3;
+    
     
 	@Override
     public Reservation reserveSpot(Integer userId, Integer parkingLotId, Integer timeInHours, Integer numberOfWheels) throws Exception {
@@ -106,7 +108,7 @@ public class ReservationServiceImpl implements ReservationService {
     	reservationList.add( reservation );
     	MinPriceSpot.setReservationList( reservationList );
     	
-//    	spotRepository3.save( MinPriceSpot );
+    	spotRepository3.save( MinPriceSpot );
     	
     	List<Reservation> listReservation = user2.getReservationList();
     	listReservation.add( reservation );
