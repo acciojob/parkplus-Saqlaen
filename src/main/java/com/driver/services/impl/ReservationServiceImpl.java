@@ -115,7 +115,7 @@ public class ReservationServiceImpl implements ReservationService {
     	userRepository3.save( user2 );
     	
     	System.out.println( "reservation" + reservation.toString() );
-    	System.out.println( "spot" + parkinglot.toString() );
+    	System.out.println( "spot" + parkingLot2.toString() );
     	
     	return reservation;
     	
