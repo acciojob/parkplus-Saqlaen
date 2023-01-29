@@ -28,7 +28,6 @@ public class ParkingLotServiceImpl implements ParkingLotService {
     	
     	parkingLotRepository1.save( parkingLot );
     	System.out.println( parkingLot.toString() );
-    	
     	return parkingLot;
     }
 
@@ -52,14 +51,15 @@ public class ParkingLotServiceImpl implements ParkingLotService {
     	parkingSpot.setOccupied(false);
     	parkingSpot.setParkingLot(lot);
     	
+    	spotRepository1.save( parkingSpot );
     	
     	List<Spot> spotsList = lot.getSpotList();
     	spotsList.add( parkingSpot );
     	lot.setSpotList(spotsList);
     	lot.setId(parkingLotId);
     	
-    	
     	parkingLotRepository1.save( lot );
+    	
     	System.out.println( parkingSpot.toString() );
     	
     	return parkingSpot;
