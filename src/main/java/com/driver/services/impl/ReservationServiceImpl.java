@@ -26,7 +26,6 @@ public class ReservationServiceImpl implements ReservationService {
     @Autowired
     ParkingLotRepository parkingLotRepository3;
     
-    @SuppressWarnings("unused")
 	@Override
     public Reservation reserveSpot(Integer userId, Integer parkingLotId, Integer timeInHours, Integer numberOfWheels) throws Exception {
     	
@@ -53,7 +52,7 @@ public class ReservationServiceImpl implements ReservationService {
     	}
     	
     	List<Spot> filteredSpots = new ArrayList<>();
-    	// select spot which can accomodate the numberofwheels
+    	// select spot which can accommodate the numberofwheels
     	if( numberOfWheels == 2 ) {
     		for( Spot spot : availableSpots ) {
     			if( spot.getSpotType() == SpotType.TWO_WHEELER || 
@@ -107,13 +106,13 @@ public class ReservationServiceImpl implements ReservationService {
     	reservationList.add( reservation );
     	MinPriceSpot.setReservationList( reservationList );
     	
-    	spotRepository3.save( MinPriceSpot );
+//    	spotRepository3.save( MinPriceSpot );
     	
     	List<Reservation> listReservation = user2.getReservationList();
     	listReservation.add( reservation );
     	user2.setReservationList( listReservation );
     	
-//    	userRepository3.save( user );
+    	userRepository3.save( user2 );
     	
     	System.out.println( "reservation" + reservation.toString() );
     	System.out.println( "spot" + parkinglot.toString() );
