@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -31,26 +32,23 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
     public Reservation reserveSpot(Integer userId, Integer parkingLotId, Integer timeInHours, Integer numberOfWheels) throws Exception {
     	
-    	Optional<ParkingLot> parkinglot = parkingLotRepository3.findById(parkingLotId);
-    	Optional<User> user = userRepository3.findById( userId );
+		ParkingLot parkingLot2 = null;
+		User user2 = null;
+		try {
+    		parkingLot2 = parkingLotRepository3.findById(parkingLotId).get();
+    		user2 = userRepository3.findById( userId ).get();
+    		
+    	}
+    	catch (NoSuchElementException e) {
+    		throw new Exception("Cannot make reservation");
+		}
 
-    	if(  !parkinglot.isPresent() || parkinglot == null ) {
-    		throw new Exception("null");
-    	}
-    	
-    	if(  !user.isPresent() || user == null ) {
-    		throw new Exception("null");
-    	}
-    	
-    	ParkingLot parkingLot2 = parkinglot.get();
-    	User user2 = user.get();
-    	
-    	
+	
     	List<Spot> listOfSpotsInParking = parkingLot2.getSpotList();
     	List<Spot> availableSpots =  listOfSpotsInParking.stream().filter( spot -> !spot.isOccupied() ).collect( Collectors.toList() );
     	
     	if( availableSpots.size() == 0 ) {
-    		throw new Exception("null");
+    		throw new Exception("Cannot make reservation");
     	}
     	
     	List<Spot> filteredSpots = new ArrayList<>();
