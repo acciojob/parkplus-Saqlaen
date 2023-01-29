@@ -37,7 +37,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
     	Spot parkingSpot = new Spot();
     	ParkingLot lot = parkingLotRepository1.findById(parkingLotId).get();
     	
-    	if( numberOfWheels == 2 ) {
+    	if( numberOfWheels <= 2 ) {
     		parkingSpot.setSpotType( SpotType.TWO_WHEELER );
     	}
     	else if( numberOfWheels > 2 && numberOfWheels <= 4 ) {
