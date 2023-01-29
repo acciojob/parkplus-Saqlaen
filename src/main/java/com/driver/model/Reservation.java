@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Reservation {
 	
@@ -30,13 +32,16 @@ public class Reservation {
 
 	@ManyToOne
 	@JoinColumn
+	@JsonIgnoreProperties(value = "reservationList")
 	private User user;
 	
 	@ManyToOne
 	@JoinColumn
+	@JsonIgnoreProperties(value = "reservationList")
 	private Spot spot;
 	
 	@OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties(value = "reservation")
 	private Payment payment;
 
 	public Reservation() {
@@ -86,8 +91,7 @@ public class Reservation {
 
 	@Override
 	public String toString() {
-		return "Reservation [id=" + id + ", numberOfHours=" + numberOfHours + ", billAmount=" + billAmount + ", user="
-				+ user + ", spot=" + spot + ", payment=" + payment + "]";
+		return "Reservation [id=" + id + ", numberOfHours=" + numberOfHours + ", billAmount=" + billAmount + "]";
 	}
 
 	public void setPayment(Payment payment) {

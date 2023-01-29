@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class ParkingLot {
 	
@@ -20,7 +22,8 @@ public class ParkingLot {
 	private String address;
 	
 	@OneToMany(mappedBy = "parkingLot", cascade = CascadeType.ALL )
-	List<Spot> spotList;
+	@JsonIgnoreProperties(value = "parkingLot")
+	private List<Spot> spotList;
 
 	public int getId() {
 		return id;
@@ -66,7 +69,7 @@ public class ParkingLot {
 
 	@Override
 	public String toString() {
-		return "ParkingLot [id=" + id + ", name=" + name + ", address=" + address + ", spotList=" + spotList + "]";
+		return "ParkingLot [id=" + id + ", name=" + name + ", address=" + address + "]";
 	}
 	
 	

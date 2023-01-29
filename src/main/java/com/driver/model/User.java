@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class User {
 	
@@ -21,6 +23,7 @@ public class User {
 	private String password;
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties(value = "user")
 	List<Reservation> reservationList;
 
 	public User() {
@@ -77,7 +80,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", phoneNumber=" + phoneNumber + ", password=" + password
-				+ ", reservationList=" + reservationList + "]";
+				+ "]";
 	}
 	
 	

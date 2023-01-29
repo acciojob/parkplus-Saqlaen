@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,19 +30,23 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
     public Reservation reserveSpot(Integer userId, Integer parkingLotId, Integer timeInHours, Integer numberOfWheels) throws Exception {
     	
-    	ParkingLot parkinglot = parkingLotRepository3.findById(parkingLotId).get();
-    	User user = userRepository3.findById( userId ).get();
+    	Optional<ParkingLot> parkinglot = parkingLotRepository3.findById(parkingLotId);
+    	Optional<User> user = userRepository3.findById( userId );
+
+    	if(  !parkinglot.isPresent() || parkinglot == null ) {
+    		throw new Exception("Cannot make reservation");
+    	}
     	
-    	List<Spot> listOfSpotsInParking = parkinglot.getSpotList();
+    	if(  !user.isPresent() || user == null ) {
+    		throw new Exception("Cannot make reservation");
+    	}
+    	
+    	ParkingLot parkingLot2 = parkinglot.get();
+    	User user2 = user.get();
+    	
+    	
+    	List<Spot> listOfSpotsInParking = parkingLot2.getSpotList();
     	List<Spot> availableSpots =  listOfSpotsInParking.stream().filter( spot -> !spot.isOccupied() ).collect( Collectors.toList() );
-    	
-    	if( parkinglot == null ) {
-    		throw new Exception("Cannot make reservation");
-    	}
-    	
-    	if( user == null ) {
-    		throw new Exception("Cannot make reservation");
-    	}
     	
     	if( availableSpots.size() == 0 ) {
     		throw new Exception("Cannot make reservation");
@@ -90,10 +95,11 @@ public class ReservationServiceImpl implements ReservationService {
     		}
     	}
     	
+    	MinPriceSpot.setOccupied(true);
     	
     	Reservation reservation = new Reservation();
     	reservation.setNumberOfHours( timeInHours );
-    	reservation.setUser(user);
+    	reservation.setUser( user2 );
     	reservation.setSpot(MinPriceSpot);
     	reservation.setBillAmount(MinTotalPrice);
     	
@@ -103,11 +109,11 @@ public class ReservationServiceImpl implements ReservationService {
     	
     	spotRepository3.save( MinPriceSpot );
     	
-    	List<Reservation> listReservation = user.getReservationList();
+    	List<Reservation> listReservation = user2.getReservationList();
     	listReservation.add( reservation );
-    	user.setReservationList( listReservation );
+    	user2.setReservationList( listReservation );
     	
-    	userRepository3.save( user );
+//    	userRepository3.save( user );
     	
     	System.out.println( "reservation" + reservation.toString() );
     	System.out.println( "spot" + parkinglot.toString() );

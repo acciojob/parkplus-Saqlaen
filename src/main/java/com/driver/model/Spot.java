@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +16,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.ColumnDefault;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Spot {
 
@@ -21,10 +25,12 @@ public class Spot {
 	@GeneratedValue( strategy = GenerationType.AUTO )
 	private int id;
 	
+	@Enumerated(EnumType.STRING)
 	private SpotType spotType;
+	
 	private int pricePerHour;
 	
-	@ColumnDefault(value = "false" )
+	@Column(columnDefinition = "boolean default false")
 	private boolean occupied;
 	
 	public boolean isOccupied() {
@@ -41,9 +47,11 @@ public class Spot {
 
 	@ManyToOne
 	@JoinColumn
+	@JsonIgnoreProperties(value = "spotList")
 	private ParkingLot parkingLot;
 	
 	@OneToMany(mappedBy = "spot", cascade = CascadeType.ALL )
+	@JsonIgnoreProperties(value = "spot")
 	List<Reservation> reservationList;
 
 	public Spot(SpotType spotType, int pricePerHour, boolean ocuupied) {
@@ -101,7 +109,7 @@ public class Spot {
 	@Override
 	public String toString() {
 		return "Spot [id=" + id + ", spotType=" + spotType + ", pricePerHour=" + pricePerHour + ", occupied=" + occupied
-				+ ", parkingLot=" + parkingLot + ", reservationList=" + reservationList + "]";
+				+ "]";
 	}
 	
 	
