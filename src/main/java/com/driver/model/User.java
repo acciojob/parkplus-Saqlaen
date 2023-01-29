@@ -1,5 +1,6 @@
 package com.driver.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,7 +25,7 @@ public class User {
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties(value = "user")
-	List<Reservation> reservationList;
+	List<Reservation> reservationList = new ArrayList<>();
 
 	public User() {
 		super();

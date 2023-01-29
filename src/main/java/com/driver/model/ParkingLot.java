@@ -1,5 +1,6 @@
 package com.driver.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,7 +24,7 @@ public class ParkingLot {
 	
 	@OneToMany(mappedBy = "parkingLot", cascade = CascadeType.ALL )
 	@JsonIgnoreProperties(value = "parkingLot")
-	private List<Spot> spotList;
+	private List<Spot> spotList = new ArrayList<>();
 
 	public int getId() {
 		return id;

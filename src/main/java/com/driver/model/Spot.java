@@ -1,5 +1,6 @@
 package com.driver.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -52,7 +53,7 @@ public class Spot {
 	
 	@OneToMany(mappedBy = "spot", cascade = CascadeType.ALL )
 	@JsonIgnoreProperties(value = "spot")
-	List<Reservation> reservationList;
+	List<Reservation> reservationList = new ArrayList<>();
 
 	public Spot(SpotType spotType, int pricePerHour, boolean ocuupied) {
 		super();

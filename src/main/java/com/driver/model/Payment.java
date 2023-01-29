@@ -1,5 +1,7 @@
 package com.driver.model;
 
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -23,7 +25,7 @@ public class Payment {
 	private boolean paymentCompleted;
 	
 	@Enumerated(EnumType.STRING)
-	private PaymentMode paymentMode;
+	private PaymentMode paymentMode ;
 	
 	@OneToOne
 	@JoinColumn
